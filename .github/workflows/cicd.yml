@@ -34,3 +34,16 @@ jobs:
       - name: Check executable
         run:
           ./rudi-go
+  integration-test: 
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build
+        run: 
+          go build
+      - name: test stt
+        run: |
+          ./rudi-go serve ${{ secrets.ASSEMBLY_AI_TOKEN }}&
+          sleep 5
+          result=$(./rudi-go stt ./audio-files/Untitled.m4a)
+          if [[ $result != *"So I'm Mr. Buffler, you know?"* ]]; then echo "stt test failed with $result" && exit 1;fi
