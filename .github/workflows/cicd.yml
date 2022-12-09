@@ -1,0 +1,36 @@
+name: CI/CD
+
+on: 
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  unit-test: 
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run unit tests
+        run: 
+          go test ./...
+      - name: Create coverage report
+        run: 
+          go test -v -coverpkg=./... -coverprofile=coverage.out ./... && go tool cover -html=coverage.out -o coverage.html
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage-report
+          path: coverage.html
+  build-test: 
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build
+        run: 
+          go build
+      - name: Check executable
+        run:
+          ./rudi-go
