@@ -7,18 +7,11 @@ import (
 	"io"
 	"net/http"
 
+	"github.com/DooomiT/rudi-go/api/stt"
 	"github.com/asticode/go-asticoqui"
 	"github.com/cryptix/wav"
 	"github.com/gin-gonic/gin"
 )
-
-type SpeechToTextDto struct {
-	Audio []byte `json:"audio"`
-}
-
-type SpeechToTextResponse struct {
-	Text string `json:"text"`
-}
 
 func audioToWav(audio []byte) ([]int16, error) {
 	r, err := wav.NewReader(bytes.NewReader(audio), int64(binary.Size(audio)))
@@ -40,7 +33,7 @@ func audioToWav(audio []byte) ([]int16, error) {
 
 func SpeechToText(model *asticoqui.Model) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		var dto SpeechToTextDto
+		var dto stt.SpeechToTextDto
 		if err := ctx.BindJSON(&dto); err != nil {
 			ctx.JSON(http.StatusBadRequest, gin.H{
 				"Status":  http.StatusBadRequest,
@@ -60,7 +53,7 @@ func SpeechToText(model *asticoqui.Model) gin.HandlerFunc {
 
 		res, err := model.SpeechToText(data)
 		if err != nil {
-			ctx.JSON(http.StatusBadRequest, gin.H{
+			ctx.JSON(http.StatusInternalServerError, gin.H{
 				"Status":  http.StatusBadRequest,
 				"Message": "error",
 				"Data":    map[string]interface{}{"data": fmt.Sprint("Failed converting speech to text: ", err)},
@@ -69,7 +62,7 @@ func SpeechToText(model *asticoqui.Model) gin.HandlerFunc {
 		}
 
 		results := []string{res}
-		respData := SpeechToTextResponse{results[0]}
+		respData := stt.SpeechToTextResponse{Text: results[0]}
 		ctx.JSON(http.StatusOK, respData)
 		return
 	}
