@@ -1,4 +1,5 @@
 # Rudi 
+[![CI/CD](https://github.com/DooomiT/rudi-go/actions/workflows/cicd.yml/badge.svg)](https://github.com/DooomiT/rudi-go/actions/workflows/cicd.yml)
 
 # Project rudi
 
