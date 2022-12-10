@@ -4,3 +4,4 @@ model
 .envrc
 !audio-files/Untitled.m4a
 audio-files/*
+*.tar*

@@ -1,5 +1,10 @@
 # Check os and install coqui stt
 
+if [[ -d "${HOME}/.coqui" ]]; then
+    echo "Coqui STT already installed"
+    exit 0
+fi
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # Mac OSX
     echo "Installing Coqui STT for Mac OSX"

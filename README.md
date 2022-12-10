@@ -10,18 +10,37 @@ The local stt model is based on the [coqui stt](https://github.com/coqui-ai/STT)
 
 ### Preparation if you want to use the local stt
 
-1. Download model files
+1. Download coqui stt native library
+  ```bash
+  ./scripts/setup-coqui.sh
+  ```
+
+2. Download model files
 - Download the model files huge-vocabulary.scorer and model.tflite from [here](https://coqui.ai/english/coqui/v1.0.0-huge-vocab)
 
-1. Add the model files to the model directory
+3. Add the model files to the model directory
 
 #### Sample audio files
 
 - Download them from https://github.com/coqui-ai/STT/releases/download/v1.4.0/audio-1.4.0.tar.gz
 
+```bash
+mkdir -p audio-files
+curl -LO https://github.com/coqui-ai/STT/releases/download/v1.4.0/audio-1.4.0.tar.gz && tar -xvzf audio-1.4.0.tar.gz -C audio-files
+```
+
 ### Setup
 
-1. Install the dependencies
+1. Export library path
+
+```bash
+export CGO_LDFLAGS="-L$HOME/.coqui/"
+export CGO_CXXFLAGS="-I$HOME/.coqui/"
+export LD_LIBRARY_PATH="$HOME/.coqui/:$LD_LIBRARY_PATH"
+# On macOSX use  export DYLD_LIBRARY_PATH="$HOME/.coqui/:$DYLD_LIBRARY_PATH"
+```
+
+2. Install the dependencies
 
 ```bash
 go install
