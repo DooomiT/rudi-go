@@ -1,1 +1,6 @@
 rudi-go
+model
+.env
+.envrc
+!audio-files/Untitled.m4a
+audio-files/*

@@ -25,5 +25,6 @@ func init() {
 	userGroup := &cobra.Group{ID: userGroupId, Title: userGroupId}
 	rootCmd.AddGroup(allGroup, userGroup)
 	rootCmd.AddCommand(Serve(allGroupId))
+	rootCmd.AddCommand(ServeLocal(allGroupId))
 	rootCmd.AddCommand(SpeechToText(userGroupId))
 }

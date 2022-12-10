@@ -4,7 +4,19 @@
 
 ## Rudi server
 
-The rudi server is a simple HTTP server that communicates with the assemblyai API. It is used to transcribe audio files and return the results to the client.
+The rudi server is a simple HTTP server that communicates with the assemblyai API or a local stt model. It is used to transcribe audio files and return the results to the client.
+The local stt model is based on the [coqui stt](https://github.com/coqui-ai/STT) project. And does only support wav files with a sample rate of 16000.
+
+### Preparation if you want to use the local stt
+
+1. Download model files
+- Download the model files huge-vocabulary.scorer and model.tflite from [here](https://coqui.ai/english/coqui/v1.0.0-huge-vocab)
+
+1. Add the model files to the model directory
+
+#### Sample audio files
+
+- Download them from https://github.com/coqui-ai/STT/releases/download/v1.4.0/audio-1.4.0.tar.gz
 
 ### Setup
 
@@ -32,6 +44,7 @@ Usage:
 
 general
   serve       
+  serve-local 
 
 user
   stt         
@@ -46,7 +59,7 @@ Flags:
 Use "rudi [command] --help" for more information about a command.
 ```
 
-### Serve
+### serve
 
 ```plain
 Run this command in order to start a api server
@@ -56,6 +69,18 @@ Usage:
 
 Flags:
   -h, --help   help for serve
+```
+
+### serve-local
+
+```plain
+Run this command in order to start a api server with a local stt instance
+
+Usage:
+  rudi serve-local <model> [scorer] [port] [flags]
+
+Flags:
+  -h, --help   help for serve-local
 ```
 
 ### STT

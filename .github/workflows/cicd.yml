@@ -10,14 +10,27 @@ on:
 
 jobs:
   unit-test: 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest      
     steps:
       - uses: actions/checkout@v3
+      - name: Prepare environment
+        run: |
+          ./scripts/setup-coqui.sh
+          export CGO_LDFLAGS="-L$HOME/.coqui/"
+          export CGO_CXXFLAGS="-I$HOME/.coqui/"
+          export LD_LIBRARY_PATH="$HOME/.coqui/:$LD_LIBRARY_PATH"
+          go install
       - name: Run unit tests
-        run: 
+        run: |
+          export CGO_LDFLAGS="-L$HOME/.coqui/"
+          export CGO_CXXFLAGS="-I$HOME/.coqui/"
+          export LD_LIBRARY_PATH="$HOME/.coqui/:$LD_LIBRARY_PATH"
           go test ./...
       - name: Create coverage report
-        run: 
+        run: |
+          export CGO_LDFLAGS="-L$HOME/.coqui/"
+          export CGO_CXXFLAGS="-I$HOME/.coqui/"
+          export LD_LIBRARY_PATH="$HOME/.coqui/:$LD_LIBRARY_PATH"
           go test -v -coverpkg=./... -coverprofile=coverage.out ./... && go tool cover -html=coverage.out -o coverage.html
       - name: Upload coverage report
         uses: actions/upload-artifact@v2
@@ -28,21 +41,47 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Prepare environment
+        run: |
+          ./scripts/setup-coqui.sh
+          export CGO_LDFLAGS="-L$HOME/.coqui/"
+          export CGO_CXXFLAGS="-I$HOME/.coqui/"
+          export LD_LIBRARY_PATH="$HOME/.coqui/:$LD_LIBRARY_PATH"
+          go install
       - name: Build
-        run: 
+        run: |
+          export CGO_LDFLAGS="-L$HOME/.coqui/"
+          export CGO_CXXFLAGS="-I$HOME/.coqui/"
+          export LD_LIBRARY_PATH="$HOME/.coqui/:$LD_LIBRARY_PATH"
           go build
       - name: Check executable
-        run:
+        run: |
+          export CGO_LDFLAGS="-L$HOME/.coqui/"
+          export CGO_CXXFLAGS="-I$HOME/.coqui/"
+          export LD_LIBRARY_PATH="$HOME/.coqui/:$LD_LIBRARY_PATH"
           ./rudi-go
   integration-test: 
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Prepare environment
+        run: |
+          ./scripts/setup-coqui.sh
+          export CGO_LDFLAGS="-L$HOME/.coqui/"
+          export CGO_CXXFLAGS="-I$HOME/.coqui/"
+          export LD_LIBRARY_PATH="$HOME/.coqui/:$LD_LIBRARY_PATH"
+          go install
       - name: Build
-        run: 
+        run: |
+          export CGO_LDFLAGS="-L$HOME/.coqui/"
+          export CGO_CXXFLAGS="-I$HOME/.coqui/"
+          export LD_LIBRARY_PATH="$HOME/.coqui/:$LD_LIBRARY_PATH"
           go build
       - name: test stt
         run: |
+          export CGO_LDFLAGS="-L$HOME/.coqui/"
+          export CGO_CXXFLAGS="-I$HOME/.coqui/"
+          export LD_LIBRARY_PATH="$HOME/.coqui/:$LD_LIBRARY_PATH"
           ./rudi-go serve ${{ secrets.ASSEMBLY_AI_TOKEN }}&
           sleep 5
           result=$(./rudi-go stt ./audio-files/Untitled.m4a)
