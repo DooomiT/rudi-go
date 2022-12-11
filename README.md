@@ -22,12 +22,7 @@ The local stt model is based on the [coqui stt](https://github.com/coqui-ai/STT)
 
 #### Sample audio files
 
-- Download them from https://github.com/coqui-ai/STT/releases/download/v1.4.0/audio-1.4.0.tar.gz
-
-```bash
-mkdir -p audio-files
-curl -LO https://github.com/coqui-ai/STT/releases/download/v1.4.0/audio-1.4.0.tar.gz && tar -xvzf audio-1.4.0.tar.gz -C audio-files
-```
+In the audio-files directory you can find some audio samples downloaded from https://github.com/coqui-ai/STT/releases/download/v1.4.0/audio-1.4.0.tar.gz
 
 ### Setup
 
