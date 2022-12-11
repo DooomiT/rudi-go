@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/DooomiT/rudi-go/client/rudi"
+	"github.com/DooomiT/rudi-go/pkg/rudi"
 
 	"github.com/spf13/cobra"
 )

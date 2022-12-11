@@ -3,15 +3,15 @@ module github.com/DooomiT/rudi-go
 go 1.19
 
 require (
+	github.com/DooomiT/assembly-ai-go v1.0.0
+	github.com/asticode/go-asticoqui v0.2.0
+	github.com/cryptix/wav v0.0.0-20180415113528-8bdace674401
 	github.com/gin-gonic/gin v1.8.1
 	github.com/spf13/cobra v1.6.1
 	github.com/stretchr/testify v1.8.1
 )
 
 require (
-	github.com/DooomiT/assembly-ai-go v1.0.0 // indirect
-	github.com/asticode/go-asticoqui v0.2.0 // indirect
-	github.com/cryptix/wav v0.0.0-20180415113528-8bdace674401 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-playground/locales v0.14.0 // indirect

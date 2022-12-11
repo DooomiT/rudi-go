@@ -50,7 +50,6 @@ func SpeechToText(model *asticoqui.Model) gin.HandlerFunc {
 				"Data":    map[string]interface{}{"data": err.Error()}})
 			return
 		}
-
 		res, err := model.SpeechToText(data)
 		if err != nil {
 			ctx.JSON(http.StatusInternalServerError, gin.H{
@@ -64,6 +63,5 @@ func SpeechToText(model *asticoqui.Model) gin.HandlerFunc {
 		results := []string{res}
 		respData := stt.SpeechToTextResponse{Text: results[0]}
 		ctx.JSON(http.StatusOK, respData)
-		return
 	}
 }
