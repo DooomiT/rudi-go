@@ -8,7 +8,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/DooomiT/rudi-go/client/assemblyai"
+	assemblyai "github.com/DooomiT/assembly-ai-go/pkg"
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 )
@@ -24,7 +24,7 @@ func TestSpeechToText(t *testing.T) {
 	reader := bytes.NewReader(requestBody)
 	response := `{"text":"I am a valid byte array"}`
 	r := SetRouter()
-	r.POST("/stt", SpeechToText(client, 1))
+	r.POST("/stt", SpeechToText(client))
 	req, _ := http.NewRequest("POST", "/stt", reader)
 	w := httptest.NewRecorder()
 	r.ServeHTTP(w, req)
@@ -36,7 +36,7 @@ func TestSpeechToText(t *testing.T) {
 func TestSpeechToTextBadRequest(t *testing.T) {
 	response := `{"Data":{"data":"invalid request"},"Message":"error","Status":400}`
 	r := SetRouter()
-	r.POST("/stt", SpeechToText(nil, 1))
+	r.POST("/stt", SpeechToText(nil))
 	req, _ := http.NewRequest("POST", "/stt", nil)
 	w := httptest.NewRecorder()
 	r.ServeHTTP(w, req)
@@ -51,7 +51,7 @@ func TestSpeechToTextUploadFileError(t *testing.T) {
 	requestBody := []byte(`{"audio": "SSBhbSBhIHZhbGlkIGJ5dGUgYXJyYXk="}`)
 	reader := bytes.NewReader(requestBody)
 	r := SetRouter()
-	r.POST("/stt", SpeechToText(client, 1))
+	r.POST("/stt", SpeechToText(client))
 	req, _ := http.NewRequest("POST", "/stt", reader)
 	w := httptest.NewRecorder()
 	r.ServeHTTP(w, req)
@@ -66,7 +66,7 @@ func TestSpeechToTextTranscriptionError(t *testing.T) {
 	requestBody := []byte(`{"audio": "SSBhbSBhIHZhbGlkIGJ5dGUgYXJyYXk="}`)
 	reader := bytes.NewReader(requestBody)
 	r := SetRouter()
-	r.POST("/stt", SpeechToText(client, 1))
+	r.POST("/stt", SpeechToText(client))
 	req, _ := http.NewRequest("POST", "/stt", reader)
 	w := httptest.NewRecorder()
 	r.ServeHTTP(w, req)
@@ -81,7 +81,7 @@ func TestSpeechToTextPollError(t *testing.T) {
 	requestBody := []byte(`{"audio": "SSBhbSBhIHZhbGlkIGJ5dGUgYXJyYXk="}`)
 	reader := bytes.NewReader(requestBody)
 	r := SetRouter()
-	r.POST("/stt", SpeechToText(client, 1))
+	r.POST("/stt", SpeechToText(client))
 	req, _ := http.NewRequest("POST", "/stt", reader)
 	w := httptest.NewRecorder()
 	r.ServeHTTP(w, req)

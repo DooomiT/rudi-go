@@ -2,12 +2,11 @@ package cmd
 
 import (
 	"fmt"
-	"net/http"
 	"os"
 	"strconv"
 
+	assemblyai "github.com/DooomiT/assembly-ai-go/pkg"
 	"github.com/DooomiT/rudi-go/api"
-	"github.com/DooomiT/rudi-go/client/assemblyai"
 	"github.com/spf13/cobra"
 )
 
@@ -43,7 +42,7 @@ func maxRetriesFromEnv(def uint) uint {
 func serveApi(args []string) error {
 	port := "3000"
 	token := args[0]
-	client := assemblyai.New(http.Client{}, "https://api.assemblyai.com/v2", token)
+	client := assemblyai.New("https://api.assemblyai.com/v2", token, nil)
 	api := api.New("v1", client, maxRetriesFromEnv(50))
 	if len(args) == 2 {
 		_, err := strconv.Atoi(args[0])

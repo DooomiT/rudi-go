@@ -9,6 +9,7 @@ require (
 )
 
 require (
+	github.com/DooomiT/assembly-ai-go v1.0.0 // indirect
 	github.com/asticode/go-asticoqui v0.2.0 // indirect
 	github.com/cryptix/wav v0.0.0-20180415113528-8bdace674401 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect

@@ -1,3 +1,5 @@
+github.com/DooomiT/assembly-ai-go v1.0.0 h1:zIIHAvVwqdxRF09LgzMv96EsRUKN3GsEYaYsH2kfkww=
+github.com/DooomiT/assembly-ai-go v1.0.0/go.mod h1:1rbrse0ltcvcMgc2LhkknN9kR+YdT712uCZ2oVs6b4A=
 github.com/asticode/go-asticoqui v0.2.0 h1:Y03X7kQUf309wHvv3ys39aYwyiFXqD9gIugNCDOVSrc=
 github.com/asticode/go-asticoqui v0.2.0/go.mod h1:HuUAasCpAyPjOQSqoY92VeBMYLkQ/Hu7Ij3aOhQrwlk=
 github.com/cheekybits/is v0.0.0-20150225183255-68e9c0620927/go.mod h1:h/aW8ynjgkuj+NQRlZcDbAbM1ORAbXjXX77sX7T289U=

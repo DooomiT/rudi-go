@@ -3,7 +3,7 @@ package stt
 import (
 	"net/http"
 
-	"github.com/DooomiT/rudi-go/client/assemblyai"
+	assemblyai "github.com/DooomiT/assembly-ai-go/pkg"
 	"github.com/gin-gonic/gin"
 )
 
@@ -15,7 +15,7 @@ type SpeechToTextResponse struct {
 	Text string `json:"text"`
 }
 
-func SpeechToText(client assemblyai.AssemblyAi, maxRetries uint) gin.HandlerFunc {
+func SpeechToText(client assemblyai.AssemblyAI) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		var dto SpeechToTextDto
 		if err := ctx.BindJSON(&dto); err != nil {
@@ -41,7 +41,7 @@ func SpeechToText(client assemblyai.AssemblyAi, maxRetries uint) gin.HandlerFunc
 				"Data":    map[string]interface{}{"data": err.Error()}})
 			return
 		}
-		transcibedAudio, err := client.PollTranscript(id, maxRetries)
+		transcibedAudio, err := client.PollTranscript(id, nil)
 		if err != nil {
 			ctx.JSON(http.StatusBadRequest, gin.H{
 				"Status":  http.StatusBadRequest,
